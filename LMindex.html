@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LegenMusic | Interactive Sanctuary of Healing Sound</title>
+  
+  <!-- CSS Framework & Aesthetics -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            therapy: {
+              bg: '#050814',
+              sidebar: '#0a0d1d',
+              card: 'rgba(15, 23, 42, 0.65)',
+              teal: '#2dd4bf',
+              lavender: '#c084fc',
+              blue: '#38bdf8',
+              rest: '#818cf8'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    /* Styling elements */
+    .blur-mesh {
+      background: radial-gradient(circle at 50% 50%, rgba(45, 212, 191, 0.15) 0%, rgba(192, 132, 252, 0.1) 50%, transparent 100%);
+    }
+    .glassmorphic {
+      background: rgba(10, 13, 29, 0.6);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+    }
+    .equalizer-bar {
+      animation: audio-bounce 1.4s ease-in-out infinite alternate;
+    }
+    @keyframes audio-bounce {
+      0% { height: 10%; }
+      100% { height: 100%; }
+    }
+  </style>
+</head>
+<body class="bg-[#04060f] text-slate-100 font-['Plus_Jakarta_Sans',sans-serif] select-none overflow-hidden h-screen flex flex-col antialiased">
+  
+  <!-- Core Layout Mesh -->
+  <div class="absolute inset-0 blur-mesh pointer-events-none z-0"></div>
+
+  <div class="flex flex-1 overflow-hidden z-10 relative">
+    
+    <!-- Sidebar -->
+    <aside class="w-80 bg-therapy-sidebar/95 border-r border-slate-900 p-6 flex flex-col justify-between hidden lg:flex">
+      <div class="flex flex-col gap-8">
+        <!-- Logo -->
+        <div class="flex items-center gap-3">
+          <div class="w-11 h-11 bg-gradient-to-tr from-therapy-teal to-therapy-lavender rounded-2xl flex items-center justify-center shadow-lg shadow-therapy-teal/15">
+            <svg class="w-5.5 h-5.5 text-slate-950" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </div>
+          <div>
+            <span class="font-['Syne'] font-extrabold text-2xl tracking-wide bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">LegenMusic</span>
+            <p class="text-[10px] text-therapy-teal uppercase tracking-widest font-bold">Therapeutic Space</p>
+          </div>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="flex flex-col gap-1.5">
+          <p class="text-[11px] font-bold text-slate-600 uppercase tracking-widest mb-3 px-3">Main Pathways</p>
+          <a href="https://sites.google.com/view/legen-muzic/home" target="_blank" class="flex items-center gap-3 px-3 py-3 rounded-xl bg-slate-900/60 text-therapy-teal border-l-4 border-therapy-teal font-medium transition-all">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            Home Sanctuary
+          </a>
+          <a href="https://sites.google.com/view/legen-muzic/healing-album" target="_blank" class="flex items-center gap-3 px-3 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-slate-900/40 transition-all">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            The Healing Album
+          </a>
+          <a href="https://www.legenmusic.com/p/latest-music-healing-sounds-body-margin.html" target="_blank" class="flex items-center gap-3 px-3 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-slate-900/40 transition-all">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            Latest Frequencies
+          </a>
+          <a href="https://www.legenmusic.com/p/sample-playlist.html" target="_blank" class="flex items-center gap-3 px-3 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-slate-900/40 transition-all">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 10h16M4 14h16M4 18h16" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            Sample Playlist
+          </a>
+        </nav>
+
+        <!-- Dynamic therapy hub -->
+        <nav class="flex flex-col gap-1.5">
+          <p class="text-[11px] font-bold text-slate-600 uppercase tracking-widest mb-3 px-3">Ecosystem &amp; Care</p>
+          <a href="https://confiventtherapy.blogspot.com/" target="_blank" class="flex items-center gap-3 px-3 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-slate-900/40 transition-all">
+            <svg class="w-5 h-5 text-therapy-lavender" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            Confivent Therapy
+          </a>
+          <a href="https://www.legenmusic.com/p/song-beat-request-legen-muzic-body-font.html" target="_blank" class="flex items-center gap-3 px-3 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-slate-900/40 transition-all">
+            <svg class="w-5 h-5 text-therapy-blue" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            Bespoke Sound Requests
+          </a>
+          <a href="https://legenmusiclink.blogspot.com/" target="_blank" class="flex items-center gap-3 px-3 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-slate-900/40 transition-all">
+            <svg class="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            Legen link Hub
+          </a>
+        </nav>
+      </div>
+
+      <!-- Quick Session Card -->
+      <div class="p-5 glassmorphic rounded-2xl flex flex-col gap-3 relative overflow-hidden">
+        <div class="absolute -right-8 -top-8 w-24 h-24 bg-therapy-teal/10 rounded-full blur-xl"></div>
+        <h4 class="font-bold text-xs text-slate-400 tracking-wider uppercase">Need professional care?</h4>
+        <p class="text-xs text-slate-300 leading-relaxed">Pioneering certified mental health therapy in Ghana. Take control of your balance.</p>
+        <a href="https://confiventtherapy.blogspot.com/" target="_blank" class="w-full text-center py-2.5 bg-therapy-teal hover:bg-teal-400 text-slate-950 font-extrabold text-xs rounded-xl transition-all shadow-md shadow-therapy-teal/15">Reach a Therapist</a>
+      </div>
+    </aside>
+
+    <!-- Main Platform Panel -->
+    <main class="flex-1 flex flex-col min-w-0 overflow-y-auto custom-scroll pb-32">
+      
+      <!-- Sticky Navigation Header -->
+      <header class="flex items-center justify-between p-6 bg-therapy-bg/85 backdrop-blur-md sticky top-0 border-b border-slate-950 z-20">
+        <div class="flex items-center gap-4 w-full max-w-md">
+          <div class="relative w-full flex items-center">
+            <!-- Icon scaled to standard w-5 h-5 config to prevent stretching -->
+            <svg class="absolute left-4 w-5 h-5 text-slate-500 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <input type="text" placeholder="Explore therapy frequencies..." class="w-full pl-12 pr-4 py-2.5 bg-slate-950/60 border border-slate-900 rounded-full text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-therapy-teal/50 transition-all">
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <a href="https://www.legenmusic.com/2025/11/listen-now.html" target="_blank" class="px-5 py-2.5 bg-therapy-teal hover:bg-teal-400 text-slate-950 font-bold text-xs lg:text-sm rounded-full transition-all shadow-lg shadow-therapy-teal/10">Listen Live Now</a>
+        </div>
+      </header>
+
+      <!-- Main Interface Content -->
+      <div class="p-6 lg:p-8 flex flex-col gap-8 max-w-7xl mx-auto w-full">
+        
+        <!-- Welcome Sanctuary Banner -->
+        <div class="relative rounded-3xl overflow-hidden min-h-[340px] flex items-end p-8 border border-slate-900 bg-gradient-to-t from-slate-950 via-transparent to-transparent">
+          <div class="absolute inset-0 bg-gradient-to-r from-therapy-teal/15 to-therapy-lavender/15 opacity-40 mix-blend-color-dodge"></div>
+          <div class="absolute -right-32 -bottom-32 w-96 h-96 bg-therapy-teal/10 rounded-full blur-3xl"></div>
+          <div class="relative z-10 w-full max-w-3xl">
+            <span class="px-3.5 py-1 bg-therapy-teal/10 text-therapy-teal border border-therapy-teal/20 text-xs font-bold tracking-widest uppercase rounded-full mb-4 inline-block">Sound Sanctuary</span>
+            <h1 class="font-['Syne'] font-black text-3xl lg:text-6xl text-white tracking-tight leading-none mb-3">Sanctuary of Healing Sounds</h1>
+            <p class="text-slate-300 text-sm lg:text-base leading-relaxed mb-6 max-w-2xl">Restore balance to your body and mind. Step away from external chaos, close your eyes, and let curated sonic therapeutic beats align your neurological frequencies.</p>
+            <div class="flex flex-wrap items-center gap-4">
+              <button onclick="playFeatured()" class="px-6 py-3.5 bg-therapy-teal hover:bg-teal-400 text-slate-950 font-extrabold text-xs lg:text-sm rounded-full transition-all shadow-lg shadow-therapy-teal/25 flex items-center gap-2">
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
+                Enter Healing Stream
+              </button>
+              <a href="https://sites.google.com/view/legen-muzic/healing-album" target="_blank" class="px-5 py-3.5 rounded-full border border-slate-700 bg-slate-900/30 text-slate-200 text-xs lg:text-sm font-bold hover:border-slate-500 transition-all">Explore Therapy Album</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Therapeutic Mood Selector -->
+        <div>
+          <h2 class="font-['Syne'] font-extrabold text-xl lg:text-2xl text-white mb-2">Align Your Frequency</h2>
+          <p class="text-xs lg:text-sm text-slate-400 mb-5">Select a biological rhythm to instantly modify your dynamic session queue.</p>
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <button onclick="filterByMood('Anxiety Relief')" class="p-5 rounded-2xl glassmorphic border border-slate-800 hover:border-therapy-teal/40 transition-all text-left flex flex-col justify-between h-36 group">
+              <div class="w-10 h-10 bg-teal-500/10 rounded-xl flex items-center justify-center text-therapy-teal group-hover:scale-110 transition-transform">🌀</div>
+              <div>
+                <h3 class="font-bold text-slate-100 text-sm">Anxiety Relief</h3>
+                <p class="text-[11px] text-slate-400">432Hz Soundwaves</p>
+              </div>
+            </button>
+            <button onclick="filterByMood('Mental Clarity')" class="p-5 rounded-2xl glassmorphic border border-slate-800 hover:border-therapy-lavender/40 transition-all text-left flex flex-col justify-between h-36 group">
+              <div class="w-10 h-10 bg-purple-500/10 rounded-xl flex items-center justify-center text-therapy-lavender group-hover:scale-110 transition-transform">🧠</div>
+              <div>
+                <h3 class="font-bold text-slate-100 text-sm">Mental Clarity</h3>
+                <p class="text-[11px] text-slate-400">High-focus lo-fi</p>
+              </div>
+            </button>
+            <button onclick="filterByMood('Deep Rest')" class="p-5 rounded-2xl glassmorphic border border-slate-800 hover:border-therapy-blue/40 transition-all text-left flex flex-col justify-between h-36 group">
+              <div class="w-10 h-10 bg-sky-500/10 rounded-xl flex items-center justify-center text-therapy-blue group-hover:scale-110 transition-transform">🌙</div>
+              <div>
+                <h3 class="font-bold text-slate-100 text-sm">Deep Rest</h3>
+                <p class="text-[11px] text-slate-400">Delta sleep frequencies</p>
+              </div>
+            </button>
+            <button onclick="filterByMood('Uplifting')" class="p-5 rounded-2xl glassmorphic border border-slate-800 hover:border-pink-500/40 transition-all text-left flex flex-col justify-between h-36 group">
+              <div class="w-10 h-10 bg-pink-500/10 rounded-xl flex items-center justify-center text-pink-400 group-hover:scale-110 transition-transform">💖</div>
+              <div>
+                <h3 class="font-bold text-slate-100 text-sm">Uplifting</h3>
+                <p class="text-[11px] text-slate-400">Resonant afrosoul rhythms</p>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Playlist Grid / Audiomack Table Redesign -->
+        <div>
+          <div class="flex items-center justify-between mb-5">
+            <div>
+              <h2 class="font-['Syne'] font-extrabold text-xl lg:text-2xl text-white">Curated Soundscape Stream</h2>
+              <p class="text-xs text-slate-400">Stream therapeutic music files compiled across the Legen Muzic platform.</p>
+            </div>
+            <button onclick="filterByMood('')" class="px-4 py-2 rounded-xl border border-slate-800 text-xs hover:border-slate-600 transition-all">Clear Filters</button>
+          </div>
+
+          <div class="glassmorphic rounded-2xl overflow-hidden border border-slate-900">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse min-w-[600px]">
+                <thead>
+                  <tr class="border-b border-slate-950 text-xs font-bold uppercase tracking-wider text-slate-500">
+                    <th class="py-4 px-6 w-12">#</th>
+                    <th class="py-4 px-4">Track Information</th>
+                    <th class="py-4 px-4">Energy Level</th>
+                    <th class="py-4 px-4">Album Section</th>
+                    <th class="py-4 px-4 text-right pr-8">Source</th>
+                  </tr>
+                </thead>
+                <tbody id="track-table-body">
+                  <!-- JS Injection -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Request & Care Block -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+          
+          <!-- Request Beat Card -->
+          <div class="p-8 rounded-3xl glassmorphic border border-slate-900 flex flex-col justify-between gap-6 relative overflow-hidden">
+            <div class="absolute -right-20 -bottom-20 w-52 h-52 bg-therapy-lavender/10 rounded-full blur-3xl"></div>
+            <div>
+              <span class="px-3.5 py-1 bg-therapy-lavender/10 text-therapy-lavender border border-therapy-lavender/20 text-[10px] font-bold tracking-widest uppercase rounded-full mb-4 inline-block">Sound Design On-Demand</span>
+              <h3 class="font-['Syne'] font-extrabold text-2xl lg:text-3xl text-white tracking-tight mb-2">Bespoke Psychological Soundscapes</h3>
+              <p class="text-xs lg:text-sm text-slate-300 leading-relaxed">Let our mental health audio producers assemble personalized frequencies, melodies, and sound designs that match your psychological healing needs.</p>
+            </div>
+            <a href="https://www.legenmusic.com/p/song-beat-request-legen-muzic-body-font.html" target="_blank" class="w-full text-center py-3 bg-therapy-lavender hover:bg-purple-400 text-slate-950 font-extrabold text-xs rounded-xl transition-all shadow-lg shadow-therapy-lavender/15">Request Custom Sound</a>
+          </div>
+
+          <!-- Medical Clinical Support -->
+          <div class="p-8 rounded-3xl glassmorphic border border-slate-900 flex flex-col justify-between gap-6 relative overflow-hidden">
+            <div class="absolute -right-20 -bottom-20 w-52 h-52 bg-therapy-teal/10 rounded-full blur-3xl"></div>
+            <div>
+              <span class="px-3.5 py-1 bg-therapy-teal/10 text-therapy-teal border border-therapy-teal/20 text-[10px] font-bold tracking-widest uppercase rounded-full mb-4 inline-block">Clinical Medicine Partnership</span>
+              <h3 class="font-['Syne'] font-extrabold text-2xl lg:text-3xl text-white tracking-tight mb-2">Clinical Counseling &amp; Telehealth</h3>
+              <p class="text-xs lg:text-sm text-slate-300 leading-relaxed">Integrated directly alongside clinical healthcare systems in Ghana (Accra Psychiatric, Korle Bu). Bringing scientific psychological diagnostics to sonic therapy.</p>
+            </div>
+            <a href="https://confiventtherapy.blogspot.com/" target="_blank" class="w-full text-center py-3 bg-therapy-teal hover:bg-teal-400 text-slate-950 font-extrabold text-xs rounded-xl transition-all shadow-lg shadow-therapy-teal/15">Contact Support</a>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Bottom Player Bar (Spotify Style Persistent Component) -->
+  <footer class="h-24 bg-[#050711]/90 backdrop-blur-xl border-t border-slate-950 p-4 flex items-center justify-between z-30 px-6 lg:px-8 relative">
+    
+    <!-- Track Title / Album Art -->
+    <div class="flex items-center gap-4 w-1/3 min-w-0">
+      <div id="footer-emoji" class="w-14 h-14 bg-slate-900 border border-slate-800 rounded-2xl flex-shrink-0 flex items-center justify-center text-2xl">🌀</div>
+      <div class="min-w-0">
+        <h4 id="footer-title" class="font-extrabold text-xs lg:text-sm text-white truncate">Zenith Serenade (432Hz)</h4>
+        <p id="footer-artist" class="text-[10px] lg:text-xs text-slate-400 truncate">Legen Muzic</p>
+      </div>
+    </div>
+
+    <!-- Central Audio Playback Hub -->
+    <div class="flex flex-col items-center gap-2 w-1/3">
+      <div class="flex items-center gap-6">
+        <button onclick="prev()" class="text-slate-400 hover:text-white transition-all">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6L18 6v12z"></path></svg>
+        </button>
+        <button id="main-play-btn" onclick="togglePlay()" class="w-11 h-11 bg-therapy-teal hover:scale-105 hover:bg-teal-400 text-slate-950 rounded-full flex items-center justify-center transition-all shadow-md shadow-therapy-teal/15">
+          <svg id="play-ico" class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
+          <svg id="pause-ico" class="w-5 h-5 fill-current hidden" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
+        </button>
+        <button onclick="next()" class="text-slate-400 hover:text-white transition-all">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M16 18h2V6h-2zM5 18l8.5-6L5 6z"></path></svg>
+        </button>
+      </div>
+      
+      <!-- Interactive Progress Stream -->
+      <div class="w-full flex items-center gap-3">
+        <span id="progress-cur" class="text-[10px] text-slate-500 font-bold">0:00</span>
+        <div id="seek-bar-track" onclick="clickSeek(event)" class="flex-1 h-1 bg-slate-950 border border-slate-900 rounded-full relative overflow-hidden cursor-pointer group">
+          <div id="seek-bar-fill" class="h-full bg-therapy-teal rounded-full w-0 transition-all duration-300"></div>
+        </div>
+        <span id="progress-max" class="text-[10px] text-slate-500 font-bold">04:12</span>
+      </div>
+    </div>
+
+    <!-- Sound wave animation widget -->
+    <div class="flex items-center justify-end gap-5 w-1/3">
+      <div id="equalizer" class="h-8 w-14 hidden md:flex items-end gap-0.5 justify-center opacity-30">
+        <span class="w-0.75 bg-therapy-teal equalizer-bar" style="animation-delay: 0.1s;"></span>
+        <span class="w-0.75 bg-therapy-teal equalizer-bar" style="animation-delay: 0.4s;"></span>
+        <span class="w-0.75 bg-therapy-teal equalizer-bar" style="animation-delay: 0.2s;"></span>
+        <span class="w-0.75 bg-therapy-teal equalizer-bar" style="animation-delay: 0.6s;"></span>
+        <span class="w-0.75 bg-therapy-teal equalizer-bar" style="animation-delay: 0.3s;"></span>
+      </div>
+      <a href="https://www.legenmusic.com/p/support-our-work-body-margin-0-font.html" target="_blank" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-slate-300 font-extrabold text-[10px] lg:text-xs rounded-xl transition-all border border-slate-800">Support Legen</a>
+    </div>
+
+  </footer>
+
+  <script>
+    // HTML5 Native Audio element setup
+    const audio = new Audio();
+
+    // Sound Database. These default SoundHelix tracks are robust test streams.
+    // Replace the 'src' value with your own therapy audio link (.mp3) to feature your custom audio content.
+    const database = [
+      { id: 1, title: "Zenith Serenade (432Hz)", artist: "Legen Muzic", mood: "Anxiety Relief", album: "Healing Album", emoji: "🌀", duration: "04:12", link: "https://www.legenmusic.com/p/latest-music-healing-sounds-body-margin.html", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" },
+      { id: 2, title: "Eucalyptus Restful Wave", artist: "Legen Muzic", mood: "Deep Rest", album: "Healing Album", emoji: "🍃", duration: "03:45", link: "https://sites.google.com/view/legen-muzic/healing-album", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" },
+      { id: 3, title: "Accra Rain (Lo-Fi Healing)", artist: "Legen Muzic & Confivent", mood: "Mental Clarity", album: "Healing Sounds", emoji: "🌧️", duration: "05:10", link: "https://www.legenmusic.com/2025/11/listen-now.html", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" },
+      { id: 4, title: "Petite Bebè (Therapeutic Edit)", artist: "Rhyme Genius", mood: "Uplifting", album: "Legacy Singles", emoji: "👶", duration: "02:15", link: "https://www.legenmusic.com/p/sample-playlist.html", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" },
+      { id: 5, title: "No Problem (Unplugged Acoustic)", artist: "Real Genia", mood: "Uplifting", album: "Legacy Singles", emoji: "✨", duration: "03:20", link: "https://legenmusiclink.blogspot.com/", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3" },
+      { id: 6, title: "Theta Brainwave Sanctuary", artist: "Legen Muzic", mood: "Deep Rest", album: "Healing Album", emoji: "🧘", duration: "06:00", link: "https://www.legenmusic.com/p/latest-music-healing-sounds-body-margin.html", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3" }
+    ];
+
+    let index = 0;
+    let playingState = false;
+
+    // Load first track automatically
+    audio.src = database[index].src;
+
+    function render(list = database) {
+      const container = document.getElementById("track-table-body");
+      container.innerHTML = "";
+
+      list.forEach((track, i) => {
+        const active = database[index].id === track.id;
+        const row = document.createElement("tr");
+        row.className = `border-b border-slate-950/40 hover:bg-slate-900/35 transition-all cursor-pointer group ${active ? 'bg-slate-900/40 text-therapy-teal' : 'text-slate-300'}`;
+        
+        row.innerHTML = `
+          <td class="py-4 px-6 text-xs font-bold text-slate-500 group-hover:text-therapy-teal" onclick="selectPlay(${database.indexOf(track)})">
+            <span class="group-hover:hidden">${i+1}</span>
+            <span class="hidden group-hover:inline">▶</span>
+          </td>
+          <td class="py-4 px-4 flex items-center gap-3.5" onclick="selectPlay(${database.indexOf(track)})">
+            <div class="w-11 h-11 rounded-xl bg-slate-950/40 border border-slate-900 flex items-center justify-center text-xl">${track.emoji}</div>
+            <div>
+              <p class="font-extrabold text-sm text-slate-200 group-hover:text-therapy-teal transition-all">${track.title}</p>
+              <p class="text-xs text-slate-500 font-medium">${track.artist}</p>
+            </div>
+          </td>
+          <td class="py-4 px-4" onclick="selectPlay(${database.indexOf(track)})">
+            <span class="px-2.5 py-1 bg-slate-950 border border-slate-900 text-slate-400 text-[10px] font-bold rounded-full uppercase tracking-wider">${track.mood}</span>
+          </td>
+          <td class="py-4 px-4 text-xs text-slate-400 font-medium" onclick="selectPlay(${database.indexOf(track)})">${track.album}</td>
+          <td class="py-4 px-4 text-right pr-8">
+            <div class="flex items-center justify-end gap-4">
+              <span class="text-xs text-slate-500 font-bold">${track.duration}</span>
+              <a href="${track.link}" target="_blank" class="p-1.5 text-slate-500 hover:text-therapy-teal transition-colors" title="Open Stream Source">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              </a>
+            </div>
+          </td>
+        `;
+        container.appendChild(row);
+      });
+    }
+
+    function selectPlay(idx) {
+      index = idx;
+      const track = database[index];
+      
+      document.getElementById("footer-title").innerText = track.title;
+      document.getElementById("footer-artist").innerText = track.artist;
+      document.getElementById("footer-emoji").innerText = track.emoji;
+      document.getElementById("progress-max").innerText = track.duration;
+      document.getElementById("progress-cur").innerText = "0:00";
+      document.getElementById("seek-bar-fill").style.width = "0%";
+      
+      audio.pause();
+      audio.src = track.src;
+      audio.load();
+      
+      audio.play().then(() => {
+        playingState = true;
+        document.getElementById("play-ico").classList.add("hidden");
+        document.getElementById("pause-ico").classList.remove("hidden");
+        document.getElementById("equalizer").classList.remove("opacity-30");
+      }).catch(err => {
+        console.log("Audio play blocked by browser policy. Interaction needed:", err);
+      });
+      render();
+    }
+
+    function togglePlay() {
+      const play = document.getElementById("play-ico");
+      const pause = document.getElementById("pause-ico");
+      const eq = document.getElementById("equalizer");
+
+      if (playingState) {
+        audio.pause();
+        playingState = false;
+        play.classList.remove("hidden");
+        pause.classList.add("hidden");
+        eq.classList.add("opacity-30");
+      } else {
+        if (!audio.src) {
+          audio.src = database[index].src;
+        }
+        audio.play().then(() => {
+          playingState = true;
+          play.classList.add("hidden");
+          pause.classList.remove("hidden");
+          eq.classList.remove("opacity-30");
+        }).catch(err => {
+          console.log("Audio play blocked:", err);
+        });
+      }
+    }
+
+    // Native Media Listeners
+    audio.addEventListener('timeupdate', () => {
+      const currentTime = audio.currentTime;
+      const duration = audio.duration || 0;
+      if (duration > 0) {
+        const pct = (currentTime / duration) * 100;
+        document.getElementById("seek-bar-fill").style.width = `${pct}%`;
+        
+        const m = Math.floor(currentTime / 60);
+        const s = Math.floor(currentTime % 60).toString().padStart(2, '0');
+        document.getElementById("progress-cur").innerText = `${m}:${s}`;
+      }
+    });
+
+    audio.addEventListener('loadedmetadata', () => {
+      const duration = audio.duration;
+      const m = Math.floor(duration / 60);
+      const s = Math.floor(duration % 60).toString().padStart(2, '0');
+      document.getElementById("progress-max").innerText = `${m}:${s}`;
+    });
+
+    audio.addEventListener('ended', () => {
+      next();
+    });
+
+    function next() {
+      index = (index + 1) % database.length;
+      selectPlay(index);
+    }
+
+    function prev() {
+      index = (index - 1 + database.length) % database.length;
+      selectPlay(index);
+    }
+
+    function clickSeek(event) {
+      const track = document.getElementById("seek-bar-track");
+      const bounds = track.getBoundingClientRect();
+      const pct = (event.clientX - bounds.left) / bounds.width;
+
+      if (audio.duration) {
+        audio.currentTime = pct * audio.duration;
+      }
+    }
+
+    function filterByMood(mood) {
+      if (mood === "") {
+        render(database);
+      } else {
+        render(database.filter(t => t.mood === mood));
+      }
+    }
+
+    function playFeatured() {
+      selectPlay(0);
+    }
+
+    window.onload = () => render();
+  </script>
+</body>
+</html>
